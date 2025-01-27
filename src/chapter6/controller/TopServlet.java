@@ -18,21 +18,9 @@ import chapter6.service.MessageService;
 @WebServlet(urlPatterns = { "/index.jsp" })
 public class TopServlet extends HttpServlet {
 
-<<<<<<< HEAD
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
-=======
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws IOException, ServletException {
-
-        boolean isShowMessageForm = false;
-        User user = (User) request.getSession().getAttribute("loginUser");
-        if (user != null) {
-            isShowMessageForm = true;
-        }
->>>>>>> 8375b72457d402fc172e17c99a7ecfa17c4d08f3
 
 		boolean isShowMessageForm = false;
 		User user = (User) request.getSession().getAttribute("loginUser");
