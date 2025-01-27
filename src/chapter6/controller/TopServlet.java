@@ -21,18 +21,19 @@ public class TopServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
-
-
+ 	
         boolean isShowMessageForm = false;
         User user = (User) request.getSession().getAttribute("loginUser");
         if (user != null) {
             isShowMessageForm = true;
         }
 
+        String searchWord = request.getParameter("word");
+    	String radiobutton = request.getParameter("radiobutton");
 		String userId = request.getParameter("user_id");
 		String start = request.getParameter("start");
         String end = request.getParameter("end");
-        List<UserMessage> messages = new MessageService().select(userId, start, end);
+        List<UserMessage> messages = new MessageService().select(userId, start, end, searchWord, radiobutton);
 
         //返信コメントを表示する
         List<UserComment> comments = new CommentService().select();
@@ -41,6 +42,7 @@ public class TopServlet extends HttpServlet {
         request.setAttribute("end", end);
         request.setAttribute("messages", messages);
         request.setAttribute("comments", comments);
+        request.setAttribute("searchWord", request.getParameter("word"));
         request.setAttribute("isShowMessageForm", isShowMessageForm);
         request.getRequestDispatcher("/top.jsp").forward(request, response);
     }
